@@ -136,6 +136,44 @@ Calling a gated operation without permission raises `PermissionError`.
 | `withdraw(agent_id, amount, to, asset="ETH")` | Transfer native token (requires `can_withdraw`) |
 | `transfer_erc20(agent_id, amount, to, contract_address)` | Transfer ERC-20 token (requires `can_withdraw`) |
 
+## MCP Server
+
+Agent Wallet ships with a [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes wallet operations as MCP tools, letting any MCP-compatible client or agent interact with the wallet directly.
+
+### Running the server
+
+```bash
+uv run mcp_server.py
+```
+
+The server loads its configuration from `wallet_config.yaml` in the project root.
+
+### Available tools
+
+| Tool | Description |
+|---|---|
+| `wallet_get_balance` | Get the wallet balance for a given asset |
+| `wallet_get_details` | Get wallet address and network info |
+| `wallet_get_deposit_address` | Get the deposit address (requires agent with `can_deposit`) |
+| `wallet_withdraw` | Withdraw native token (requires agent with `can_withdraw`) |
+| `wallet_transfer_erc20` | Transfer an ERC-20 token (requires agent with `can_withdraw`) |
+
+### Client configuration
+
+Add to your MCP client config (e.g. Claude Desktop `claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "agent-wallet": {
+      "command": "uv",
+      "args": ["run", "mcp_server.py"],
+      "cwd": "/path/to/agent-wallet"
+    }
+  }
+}
+```
+
 ## Requirements
 
 - Python >= 3.12
