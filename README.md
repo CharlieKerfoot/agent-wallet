@@ -17,7 +17,9 @@ Give every AI agent its own permission scope on a single onchain wallet — depo
 ### Install
 
 ```bash
-uv add agent-wallet
+git clone https://github.com/your-org/agent-wallet.git
+cd agent-wallet
+uv sync
 ```
 
 ### Set up credentials
@@ -33,6 +35,13 @@ cp .env.example .env
 CDP_API_KEY_ID=your-key-id
 CDP_API_KEY_SECRET=your-key-secret
 CDP_WALLET_SECRET=your-wallet-secret
+```
+
+### Configure agents
+
+```bash
+cp wallet_config.example.yaml wallet_config.yaml
+# edit wallet_config.yaml to define your agents
 ```
 
 ### Basic usage
@@ -167,8 +176,7 @@ Add to your MCP client config (e.g. Claude Desktop `claude_desktop_config.json`)
   "mcpServers": {
     "agent-wallet": {
       "command": "uv",
-      "args": ["run", "mcp_server.py"],
-      "cwd": "/path/to/agent-wallet"
+      "args": ["run", "--directory", "/path/to/agent-wallet", "mcp_server.py"],
     }
   }
 }

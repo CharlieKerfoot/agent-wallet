@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from mcp.server.fastmcp import FastMCP
 from agent_wallet import AgentWallet, Permissions, WalletConfig, AgentConfig
 from agent_wallet.loader import load_config
