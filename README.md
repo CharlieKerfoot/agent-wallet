@@ -176,7 +176,7 @@ Add to your MCP client config (e.g. Claude Desktop `claude_desktop_config.json`)
   "mcpServers": {
     "agent-wallet": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/agent-wallet", "mcp_server.py"],
+      "args": ["run", "--directory", "/path/to/agent-wallet", "mcp_server.py"]
     }
   }
 }
