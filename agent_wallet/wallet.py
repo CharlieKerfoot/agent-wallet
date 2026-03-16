@@ -81,10 +81,9 @@ class AgentWallet:
 
   def _run_action(self, action_name: str, args: dict[str, Any]) -> str:
     """Run a named AgentKit action and return the string result."""
-    for provider in self._agentkit.config.action_providers:
-      for action in provider.get_actions(self._wallet_provider):
-        if action.name == action_name:
-          return action.invoke(args)
+    for action in self._agentkit.get_actions():
+      if action.name == action_name:
+        return action.invoke(args)
     raise ValueError(f"Action '{action_name}' not found in configured providers.")
 
   # ------------------------------------------------------------------
@@ -102,11 +101,11 @@ class AgentWallet:
 
   def get_wallet_details(self) -> str:
     """Return wallet address and network info."""
-    return self._run_action("get_wallet_details", {})
+    return self._run_action("WalletActionProvider_get_wallet_details", {})
 
   def get_balance(self, asset: str = "eth") -> str:
     """Get the wallet's balance for a given asset."""
-    return self._run_action("get_balance", {"asset_id": asset})
+    return self._run_action("WalletActionProvider_get_balance", {})
 
   def get_deposit_address(self, agent_id: str, asset: str = "ETH") -> str:
     """Return the wallet address an agent can send funds to.
@@ -131,7 +130,7 @@ class AgentWallet:
     perms = self._get_permissions(agent_id)
     perms.check_withdraw(amount, asset)
     return self._run_action(
-      "native_transfer",
+      "WalletActionProvider_native_transfer",
       {"to": to, "value": str(amount)},
     )
 
@@ -147,10 +146,10 @@ class AgentWallet:
     perms = self._get_permissions(agent_id)
     perms.check_withdraw(amount, asset)
     return self._run_action(
-      "transfer_erc20",
+      "ERC20ActionProvider_transfer",
       {
-        "to": to,
-        "value": str(amount),
+        "destination_address": to,
+        "amount": str(amount),
         "contract_address": contract_address,
       },
     )

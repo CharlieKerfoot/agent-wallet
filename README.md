@@ -155,6 +155,12 @@ Agent Wallet ships with a [Model Context Protocol](https://modelcontextprotocol.
 uv run mcp_server.py
 ```
 
+Or use the included shell script, which sources your shell environment and runs via `uv`:
+
+```bash
+./run_mcp.sh
+```
+
 The server loads its configuration from `wallet_config.yaml` in the project root.
 
 ### Available tools
@@ -177,6 +183,18 @@ Add to your MCP client config (e.g. Claude Desktop `claude_desktop_config.json`)
     "agent-wallet": {
       "command": "uv",
       "args": ["run", "--directory", "/path/to/agent-wallet", "mcp_server.py"]
+    }
+  }
+}
+```
+
+Or using the shell script (useful when your environment needs shell profile setup, e.g. for `uv` on PATH):
+
+```json
+{
+  "mcpServers": {
+    "agent-wallet": {
+      "command": "/path/to/agent-wallet/run_mcp.sh"
     }
   }
 }
