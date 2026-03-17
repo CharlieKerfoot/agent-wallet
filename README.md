@@ -1,3 +1,7 @@
+I had this idea that if I gave an LLM access to a wallet, and told it to do anything it's power to put money in the account, it may produce an interesting result. Spoiler: it did not. Here is the chat for reference: https://claude.ai/share/4e0f9d29-6adb-4646-97a2-221442c0b7d4. Also, my grandma is thankfully not dying; that was simply my half-assed attempt at prompt injection. Maybe, this idea could be extended further, but it seems that it would require more jailbreaking than technical prowess.
+
+Anyways, here is the agentic wallet I built for this experiment:
+
 # Agent Wallet
 
 A model/agent-agnostic shared wallet with per-agent permissions, powered by [Coinbase AgentKit](https://github.com/coinbase/agentkit).
