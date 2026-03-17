@@ -2,7 +2,7 @@
 # CDP credentials can also be set via environment variables:
 #   CDP_API_KEY_ID, CDP_API_KEY_SECRET, CDP_WALLET_SECRET
 
-network_id: base-sepolia
+network_id: base-mainnet #base-sepolia for test wallet
 
 # Uncomment to reuse an existing wallet:
 # wallet_address: "0x..."
